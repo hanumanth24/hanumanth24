@@ -1,0 +1,78 @@
+# =============================================================
+# GitHub Actions Workflow: Contribution Snake Animation
+# Repository: hanumanth24/hanumanth24 (profile repo)
+# 
+# SETUP INSTRUCTIONS:
+# 1. Go to Settings > Actions > General
+# 2. Under "Workflow permissions", enable "Read and write permissions"
+# 3. Run this workflow manually once via Actions > generate-snake-animation > Run workflow
+# 4. After it runs, the snake SVGs will appear in the output/ branch
+# 5. The README already references these SVG URLs — they will auto-display!
+#
+# The workflow runs:
+# - Daily at 12:00 UTC (auto schedule)
+# - On every push to main branch
+# - Manually via workflow_dispatch
+# =============================================================
+
+name: Generate Snake Animation
+
+on:
+  # Run on a schedule — daily at noon UTC
+  schedule:
+    - cron: "0 12 * * *"
+  
+  # Run on every push to main
+  push:
+    branches:
+      - main
+  
+  # Allow manual trigger from Actions tab
+  workflow_dispatch:
+
+jobs:
+  generate-snake:
+    name: Generate GitHub Contribution Snake
+    runs-on: ubuntu-latest
+    
+    # Required permissions to push the generated SVG back to the repo
+    permissions:
+      contents: write
+    
+    steps:
+      # Step 1: Generate the snake animation SVGs
+      - name: Generate Snake SVG
+        uses: Platane/snk/svg-only@v3
+        with:
+          # Replace with your GitHub username if different
+          github_user_name: hanumanth24
+          
+          # Output paths for both light and dark theme snake SVGs
+          outputs: |
+            dist/github-contribution-grid-snake.svg
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+        
+        env:
+          # Uses the default GitHub token — no extra secret needed
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      # Step 2: Push the generated SVGs to the output branch
+      - name: Push Snake SVG to Output Branch
+        uses: crazy-max/ghaction-github-pages@v3
+        with:
+          # Push to the "output" branch (not main)
+          target_branch: output
+          
+          # The folder containing the generated SVGs
+          build_dir: dist
+        
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+# =============================================================
+# After this runs successfully, the snake SVGs will be at:
+# https://raw.githubusercontent.com/hanumanth24/hanumanth24/output/github-contribution-grid-snake.svg
+# https://raw.githubusercontent.com/hanumanth24/hanumanth24/output/github-contribution-grid-snake-dark.svg
+#
+# The README already references the dark version in the GitHub Dashboard section.
+# =============================================================
