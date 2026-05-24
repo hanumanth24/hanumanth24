@@ -19,7 +19,7 @@
 ██████████████████████████████████████████████████████████ -->
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0D1117,30:0A192F,60:003566,100:00B4D8&height=220&section=header&text=Hanu%20Reddy&fontSize=62&fontColor=00E5FF&animation=fadeIn&fontAlignY=38&desc=Senior%20AEM%20Developer%20%7C%20React%20%26%20Full%20Stack%20Engineer%20%7C%20Adobe%20Experience%20Cloud%20Specialist&descAlignY=58&descSize=16&descColor=A8D8EA" alt="Hero Banner"/>
+  <img src="https://raw.githubusercontent.com/hanumanth24/hanumanth24/main/assets/hero-banner.svg" alt="Hero Banner — Hanumanth Reddy, Senior AEM Developer" width="100%"/>
 </p>
 
 <p align="center">
